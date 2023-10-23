@@ -3,7 +3,7 @@ import { AiFillFacebook,AiFillGoogleSquare, AiFillTwitterCircle } from "react-ic
 const Footer = () => {
     return (
       
-        <footer className="footer p-10 bg-base-200 text-base-content">
+        <footer className="footer p-10 bg-base-200 mt-5 text-base-content">
   <aside>
       <img className=" w-40 h-36" src="https://i.ibb.co/NtvTp4K/395199656-859942578832265-6048415189227583555-n.jpg" alt="" />
     <p>When you purchase a new vehicle in the United States<br/>You receive a title whether you buy a new or used vehicle from a dealer or a private citizen.</p>
