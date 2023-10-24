@@ -1,4 +1,7 @@
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
@@ -10,9 +13,25 @@ const Navbar = () => {
     <li> <Link to='/services' > Services  </Link> </li>
     <li> <Link to='/blog' >Blog</Link> </li>
     <li> <Link to='/contact' >contact</Link> </li>
-    <li> <Link to='/login' >Login</Link> </li>
+    
     
     </>
+
+    const {user, logOut } = useContext(AuthContext)
+    const [User, setUser]= useState(null)
+    
+  const  handleSingOut = () =>{
+    logOut()
+    .then(result => {
+     console.log(result)
+     Swal.fire('LogOut Successfully')
+ })
+ 
+ .catch()
+ setUser(user) 
+}
+
+
 
     return (
         <div>
@@ -40,7 +59,40 @@ const Navbar = () => {
    }
     </ul>
   </div>
+
+
+
   <div className="navbar-end">
+
+  <div>
+
+  {
+            user ?
+              <button onClick={ handleSingOut} className=" btn btn-secondary mr-4 " > Sign Out </button>
+              :
+
+              <Link to='/login' > <button className=" btn btn-secondary mr-4 " > Login </button> </Link>
+             
+
+          }  
+
+{/* <button className=" btn btn-secondary mr-4 " >    <Link to='/login' >Login</Link>  </button> */}
+
+
+
+</div>
+
+{user &&
+                    <div>
+
+                        <div> 
+                            <img className=" w-16 h-16 mr-3  rounded-full" src={User?.photoURL} alt="" />
+                        </div>
+
+                    </div>
+
+                }
+
   <button className="btn btn-outline btn-secondary">Appointment</button>
    
   </div>
