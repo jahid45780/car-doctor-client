@@ -3,7 +3,7 @@ import { AiOutlineGoogle,AiOutlineFacebook,AiOutlineGithub } from "react-icons/a
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
 
 
@@ -13,7 +13,8 @@ const Login = () => {
   // const [SetUser] = useState(null)
   const auth = getAuth(app)
   const provider = new GoogleAuthProvider()
- 
+  const Providers = new GithubAuthProvider
+  
 
   // googleLogin
   const handleGoogleSignIn = ()=>{
@@ -29,8 +30,20 @@ const Login = () => {
     .catch(error=>{
       console.error(error)
     })
+   } 
 
-  } 
+   
+    // github login
+ const handleGitHubSignIn = ()=>{
+  signInWithPopup(auth,Providers)
+  .then(result=>{
+    const user = result.user
+    console.log(user)
+  })
+  .catch(error=>{
+    console.error(error)
+  })
+ } 
 
       // login 
     const handleLogin = event =>{
@@ -90,7 +103,7 @@ const Login = () => {
          <p className=" flex items-center justify-center gap-2 text-2xl mt-3" >
         <button>  <AiOutlineGoogle onClick={handleGoogleSignIn} ></AiOutlineGoogle> </button>
         <AiOutlineFacebook></AiOutlineFacebook>
-        <AiOutlineGithub></AiOutlineGithub>
+       <button>  <AiOutlineGithub onClick={handleGitHubSignIn} ></AiOutlineGithub> </button>
          </p>
       </div>
       <div>
