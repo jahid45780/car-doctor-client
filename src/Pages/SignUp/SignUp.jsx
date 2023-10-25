@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
 
 
 const SignUp = () => {
@@ -15,9 +16,10 @@ const SignUp = () => {
         event.preventDefault()
         const form = event.target;
         const name = form.name.value;
+        const photo = form.photo.value
         const email = form.email.value;
         const password = form.password.value
-        console.log(name, email,password);
+        console.log(name, email,password,photo); 
         
         if(password.length < 6  ){
           Swal.fire('Password must be more than 6 digits')
@@ -30,15 +32,18 @@ const SignUp = () => {
    } 
 
 
-        createdUser(email,password)
+        createdUser(email,password,name,photo)
         .then(result =>{
           const user = result.user;
           console.log(user);
           Swal.fire('Account Credited Successfully')
+          updateProfile(result.user,{
+            photoURL:photo
+          })
         })
         .catch(error =>{
           console.log(error)
-          Swal.fire(' Already have this account ')
+          Swal.fire(' Already have this account ') 
         })
     }
     return (
@@ -60,6 +65,14 @@ const SignUp = () => {
               <span className="label-text">Name</span>
             </label>
             <input type="text" placeholder=" your Name" name="name" className="input input-bordered" required />
+          </div>
+     
+      <div className="form-control">
+            
+            <label className="label">
+              <span className="label-text">Photo</span>
+            </label>
+            <input type="text" placeholder=" enter  photo" name="photo" className="input input-bordered" required />
           </div>
 
         <div className="form-control">
