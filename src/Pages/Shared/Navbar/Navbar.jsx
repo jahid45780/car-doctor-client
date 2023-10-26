@@ -13,6 +13,7 @@ const Navbar = () => {
     <li> <Link to='/services' > Services  </Link> </li>
     <li> <Link to='/blog' >Blog</Link> </li>
     <li> <Link to='/contact' >contact</Link> </li>
+    <li> <Link to='/booking' >My Booking</Link> </li>
 
 
   </>
@@ -30,8 +31,6 @@ const Navbar = () => {
       .catch()
 
   }
-
-
 
   return (
     <div>
@@ -59,9 +58,7 @@ const Navbar = () => {
             }
           </ul>
         </div>
-
-
-
+        
         <div className="navbar-end">
 
           <div>
@@ -73,7 +70,7 @@ const Navbar = () => {
                     <img src={user?.photoURL} />
                   </div>
                 </label>
-                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-60">
                   <li>
                     <a className="justify-between">
                       Profile
