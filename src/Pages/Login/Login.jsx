@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineGoogle,AiOutlineFacebook,AiOutlineGithub } from "react-icons/ai";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
+import axios from "axios";
 
 
 const Login = () => {
@@ -14,7 +15,9 @@ const Login = () => {
   const auth = getAuth(app)
   const provider = new GoogleAuthProvider()
   const Providers = new GithubAuthProvider
-  
+  const location = useLocation()
+  const navigate  = useNavigate()
+  // console.log(location);
 
   // googleLogin
   const handleGoogleSignIn = ()=>{
@@ -25,6 +28,7 @@ const Login = () => {
       const user = result.user
       // SetUser(user)
       console.log(user)
+      navigate(location?.state? location?. state : '/')
     })
 
     .catch(error=>{
@@ -39,6 +43,7 @@ const Login = () => {
   .then(result=>{
     const user = result.user
     console.log(user)
+    navigate(location?.state? location?. state : '/')
   })
   .catch(error=>{
     console.error(error)
@@ -51,12 +56,22 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        
        
         singIn(email,password)
         .then(result =>{
-          const user = result.user
-          console.log(user)
+          const loggedInUser = result.user
+          console.log(loggedInUser);
+          const user = {email};
+          // navigate(location?.state? location?. state : '/')
+          // get access token
+            axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
+            .then(res=>{
+              console.log(res.data);
+              if(res.data.success){
+                navigate(location?.state? location?. state : '/')
+              }
+            })
           Swal.fire('Login Successfully')
         })
         .catch(error=>{

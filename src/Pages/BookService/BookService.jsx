@@ -54,8 +54,8 @@ const BookService = () => {
 
 
 
-            <div className=" text-center lg:absolute lg:-mt-[50px] lg:ml-[540px] py-3 px-7 bg-[#FF3811] " >
-                <h2 className=" text-xl font-bold " >{title} </h2>
+            <div className=" text-center lg:absolute lg:-mt-[50px] lg:ml-[540px] py-3 px-7 bg-[#FF3811]" >
+                <h2 className=" text-xl  font-bold " >{title} </h2>
             </div>
 
             <form onSubmit={handleBookService} className="bg-[#F3F3F3] m-2 " >
