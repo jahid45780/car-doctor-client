@@ -5,7 +5,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-import axios from "axios";
+// import axios from "axios";
 
 
 const Login = () => {
@@ -62,16 +62,16 @@ const Login = () => {
         .then(result =>{
           const loggedInUser = result.user
           console.log(loggedInUser);
-          const user = {email};
+          // const user = {email};
           // navigate(location?.state? location?. state : '/')
           // get access token
-            axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
-            .then(res=>{
-              console.log(res.data);
-              if(res.data.success){
-                navigate(location?.state? location?. state : '/')
-              }
-            })
+            // axios.post('http://localhost:5000/jwt', user,{withCredentials:true})
+            // .then(res=>{
+            //   console.log(res.data);
+            //   if(res.data.success){
+            //     navigate(location?.state? location?. state : '/')
+            //   }
+            // })
           Swal.fire('Login Successfully')
         })
         .catch(error=>{
